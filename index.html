@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SF (Sigfredo Fernandez) - Developer Portfolio</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind custom colors from your palette
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#050A30', // deep navy
+            navy: '#000C66',    // dark blue
+            royal: '#0000FF',   // vivid blue
+            sky: '#7EC8E3'      // light cyan
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      /* Map palette to Bootstrap CSS variables */
+      --bs-primary: #0000FF; /* royal */
+      --bs-secondary: #7EC8E3; /* sky */
+      --bs-body-bg: #050A30; /* primary */
+      --bs-body-color: #EAF6FF; /* light text */
+      --ring: 0 0 0 .25rem rgba(126,200,227,.35);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Enhanced wavy animated background with multiple layers */
+    .wavy-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #050A30 0%, #000C66 25%, #050A30 50%, #000C66 75%, #050A30 100%);
+    }
+
+    /* Multiple wave layers for enhanced effect */
+    .wavy-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300%;
+      height: 300%;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(126, 200, 227, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 0, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(126, 200, 227, 0.08) 0%, transparent 60%);
+      animation: waveFlow1 20s ease-in-out infinite;
+    }
+
+    .wavy-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: url("data:image/svg+xml,%3Csvg width='120' height='40' viewBox='0 0 120 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,20 Q30,0 60,20 T120,20 V40 H0 Z' fill='%237EC8E3' fill-opacity='0.06'/%3E%3C/svg%3E") repeat-x;
+      animation: waveMove1 12s linear infinite;
+    }
+
+    /* Additional wave layer */
+    .wave-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .wave-layer::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 0;
+      width: 250%;
+      height: 60%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='30' viewBox='0 0 100 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,15 Q25,5 50,15 T100,15 V30 H0 Z' fill='%230000FF' fill-opacity='0.04'/%3E%3C/svg%3E") repeat-x;
+      animation: waveMove2 15s linear infinite reverse;
+    }
+
+    .wave-layer::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 180%;
+      height: 40%;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='25' viewBox='0 0 80 25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,12 Q20,2 40,12 T80,12 V25 H0 Z' fill='%237EC8E3' fill-opacity='0.08'/%3E%3C/svg%3E") repeat-x;
+      animation: waveMove3 18s linear infinite;
+    }
+
+    @keyframes waveFlow1 {
+      0%, 100% { transform: translateX(0) translateY(0) rotate(0deg) scale(1); }
+      25% { transform: translateX(-30px) translateY(-20px) rotate(1deg) scale(1.02); }
+      50% { transform: translateX(-60px) translateY(0) rotate(0deg) scale(1); }
+      75% { transform: translateX(-30px) translateY(20px) rotate(-1deg) scale(0.98); }
+    }
+
+    @keyframes waveMove1 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-120px); }
+    }
+
+    @keyframes waveMove2 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100px); }
+    }
+
+    @keyframes waveMove3 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-80px); }
+    }
+
+    /* Enhanced navbar styling */
+    .navbar-custom {
+      background: rgba(5, 10, 48, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(126, 200, 227, 0.3);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-custom.scrolled {
+      background: rgba(5, 10, 48, 0.98);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      border-bottom-color: rgba(126, 200, 227, 0.5);
+    }
+
+    /* Enhanced fade-in animations with more dramatic effects */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(60px) scale(0.9);
+      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-80px) scale(0.85);
+      transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(80px) scale(0.85);
+      transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(100px) scale(0.7);
+      transition: all 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Staggered animation delays */
+    .fade-in:nth-child(1) { transition-delay: 0.1s; }
+    .fade-in:nth-child(2) { transition-delay: 0.2s; }
+    .fade-in:nth-child(3) { transition-delay: 0.3s; }
+    .fade-in:nth-child(4) { transition-delay: 0.4s; }
+    .fade-in:nth-child(5) { transition-delay: 0.5s; }
+
+    /* Enhanced hover effects */
+    .card-hover { 
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+      transform: translateY(0) scale(1);
+      border: 1px solid rgba(126, 200, 227, 0.2);
+    }
+    
+    .card-hover:hover { 
+      transform: translateY(-15px) scale(1.05); 
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 255, 0.3), 
+        0 10px 25px rgba(126, 200, 227, 0.2),
+        0 0 0 1px rgba(126, 200, 227, 0.4);
+      border-color: rgba(126, 200, 227, 0.6);
+    }
+
+    /* Skills level indicators */
+    .skill-item {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      border: 1px solid rgba(126, 200, 227, 0.2);
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(126, 200, 227, 0.2);
+      border-color: rgba(126, 200, 227, 0.5);
+    }
+
+    .skill-progress {
+      height: 8px;
+      background: rgba(126, 200, 227, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0000FF, #7EC8E3);
+      border-radius: 10px;
+      transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .skill-progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Utility classes */
+    .content-max{ max-width: 1200px; }
+
+    /* Enhanced button styles */
+    .btn-primary{ 
+      background: linear-gradient(135deg, #0000FF, #0000CC);
+      border: none;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 255, 0.4);
+    }
+
+    .btn-outline-light {
+      border: 2px solid rgba(126, 200, 227, 0.5);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .btn-outline-light:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(126, 200, 227, 0.3);
+      border-color: #7EC8E3;
+      background: rgba(126, 200, 227, 0.1);
+    }
+
+    /* Profile image animation */
+    .profile-img {
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .profile-img::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #7EC8E3, #0000FF, #7EC8E3);
+      z-index: -1;
+      animation: rotate 3s linear infinite;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 20px 40px rgba(126, 200, 227, 0.4);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Navbar enhancements */
+    .navbar-brand {
+      transition: all 0.3s ease;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand:hover {
+      transform: scale(1.05);
+      color: #7EC8E3 !important;
+    }
+
+    /* Nav link hover effects */
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0000FF, #7EC8E3);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #7EC8E3 !important;
+      transform: translateY(-2px);
+    }
+
+    /* Contact icon animations */
+    .contact-icon {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: inline-block;
+    }
+
+    .contact-icon:hover {
+      transform: scale(1.3) rotate(10deg);
+      color: #7EC8E3 !important;
+    }
+
+    /* Floating animation for profile section */
+    .floating {
+      animation: floating 4s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Enhanced section spacing */
+    .section-padding {
+      padding: 5rem 0;
+    }
+
+    /* Glassmorphism effect */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #050A30;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #0000FF, #7EC8E3);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #7EC8E3, #0000FF);
+    }
+
+    /* Horizontal Projects Carousel */
+    .projects-carousel-container {
+      position: relative;
+    }
+
+    .projects-carousel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(126, 200, 227, 0.5) transparent;
+    }
+
+    .projects-carousel::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .projects-carousel::-webkit-scrollbar-track {
+      background: rgba(126, 200, 227, 0.1);
+      border-radius: 10px;
+    }
+
+    .projects-carousel::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #0000FF, #7EC8E3);
+      border-radius: 10px;
+    }
+
+    .projects-carousel::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, #7EC8E3, #0000FF);
+    }
+
+    /* Smooth scroll snap for better UX */
+    .projects-carousel {
+      scroll-snap-type: x mandatory;
+    }
+
+    .project-card {
+      scroll-snap-align: start;
+    }
+    /* Force nav links to be visible */
+.navbar-custom .nav-link {
+  color: #EAF6FF !important; /* light cyan/white */
+  display: block !important;
+  visibility: visible !important;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #7EC8E3 !important; /* your light blue hover */
+}
+
+.navbar-custom .navbar-nav {
+  display: flex !important;
+}
+
+.navbar-custom .nav-item {
+  display: block !important;
+}
+
+/* Ensure navbar toggler is visible */
+.navbar-custom .navbar-toggler {
+  border-color: rgba(126, 200, 227, 0.5) !important;
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28126, 200, 227, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+    /* Enhanced Project Image Containers */
+    .project-image-container {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.1), rgba(126, 200, 227, 0.1));
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: brightness(0.9) contrast(1.1);
+    }
+    
+    .project-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.15), rgba(126, 200, 227, 0.1));
+      opacity: 0;
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+    
+    .card-hover:hover .project-image {
+      transform: scale(1.08);
+      filter: brightness(1.1) contrast(1.2);
+    }
+    
+    .card-hover:hover .project-image-overlay {
+      opacity: 1;
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.2), rgba(126, 200, 227, 0.15));
+    }
+    
+    /* Enhanced Skill Icons with Gradients */
+    .skill-item .fab, .skill-item .fas {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+    
+    .skill-item:hover .fab, .skill-item:hover .fas {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 4px 15px rgba(126, 200, 227, 0.4));
+    }
+    
+    /* Gradient Text for TypeScript Icon */
+    .typescript-icon {
+      background: linear-gradient(135deg, #3178C6, #5BA7F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Enhanced Card Animations */
+    .card-hover {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(126, 200, 227, 0.1), transparent);
+      transition: left 0.6s ease;
+      z-index: 1;
+    }
+    
+    .card-hover:hover::before {
+      left: 100%;
+    }
+    
+    /* Subtle Background Animations */
+    @keyframes subtleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-3px) rotate(0.5deg); }
+      66% { transform: translateY(3px) rotate(-0.5deg); }
+    }
+    
+    .project-card:nth-child(odd) {
+      animation: subtleFloat 8s ease-in-out infinite;
+    }
+    
+    .project-card:nth-child(even) {
+      animation: subtleFloat 8s ease-in-out infinite reverse;
+      animation-delay: -4s;
+    }
+    
+    /* Enhanced Glassmorphism */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(126, 200, 227, 0.2);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .glass-effect:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(126, 200, 227, 0.4);
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(126, 200, 227, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+  </style>
+</head>
+<body class="bg-primary text-white">
+  <!-- Enhanced wavy animated background with multiple layers -->
+  <div class="wavy-bg"></div>
+  <div class="wave-layer"></div>
+
+  <!-- Fixed Navbar with 4 sections -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="#profile">Sigfredo Fernandez</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <main style="padding-top: 80px;">
+    <!-- 1) PROFILE / HERO SECTION -->
+    <section id="profile" class="section-padding">
+      <div class="container content-max mx-auto px-4">
+        <div class="row align-items-center g-5">
+          <!-- Avatar -->
+          <div class="col-lg-5 text-center fade-in-left">
+            <div class="profile-img floating d-inline-block position-relative">
+              <div class="rounded-circle overflow-hidden" style="width: 280px; height: 280px; margin: 0 auto;">
+                <img src="FERNANDEZ SIGFREDO JR. A.jpg" alt="SF Profile photo" class="w-100 h-100 object-fit-cover" />
+              </div>
+            </div>
+          </div>
+          <!-- Summary -->
+          <div class="col-lg-7 fade-in-right">
+            <span class="badge bg-gradient text-uppercase tracking-wider mb-3 px-3 py-2" style="background: linear-gradient(45deg, rgba(126, 200, 227, 0.2), rgba(0, 0, 255, 0.2)); color: #7EC8E3;">Hello, I'm</span>
+            <h1 class="display-3 fw-bold mb-4 lh-1">Sigfredo Fernandez</h1>
+            <p class="lead mb-4 text-light opacity-75">Full-stack developer passionate about creating innovative web solutions. I specialize in modern JavaScript frameworks, responsive design, and building scalable applications that deliver exceptional user experiences.</p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <a href="#projects" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+                <i class="fas fa-code me-2"></i>View Projects
+              </a>
+              <a href="#contact" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill">
+                <i class="fas fa-envelope me-2"></i>Contact Me
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider Wave -->
+    <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="none" class="w-100" style="height: 80px; color: #000C66;">
+      <path fill="currentColor" d="M0,64L60,58.7C120,53,240,43,360,37.3C480,32,600,32,720,42.7C840,53,960,75,1080,85.3C1200,96,1320,96,1380,96L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+    </svg>
+
+    <!-- 2) PROJECTS SECTION -->
+    <section id="projects" class="section-padding" style="background: #000C66;">
+      <div class="container content-max mx-auto px-4">
+        <div class="text-center mb-5 fade-in-up">
+          <h2 class="display-4 fw-bold mb-3">Featured Projects</h2>
+          <p class="lead text-light opacity-75 mx-auto" style="max-width: 600px;">Showcase of my best work featuring modern web applications, innovative solutions, and creative implementations.</p>
+        </div>
+
+        <!-- Horizontal Scrollable Projects Container -->
+        <div class="projects-carousel-container fade-in">
+          <div class="projects-carousel d-flex gap-4 pb-3" style="overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
+            <!-- Project Card 1 -->
+            <div class="project-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative project-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="project-image-overlay"></div>
+                  <img src="smartgate.png" alt="SmartGate Project" class="project-image" />
+                </div>
+                <div class="p-4">
+                  <h4 class="fw-bold mb-3">SmartGate Arduino-Controlled Gate - Academic Capstone Project</h4>
+<p class="text-light opacity-75 mb-3">An automated RFID-based entry and exit monitoring system with Arduino-controlled gates. It records student and staff movement, generates visitor QR passes, and sends real-time notifications to parents for enhanced school security.</p>
+
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Java</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Springboot</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Tailwind CSS</span>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <a href="https://github.com/petitesnorlax25/SmartGateDeployment" class="btn btn-primary btn-sm rounded-pill px-3">
+                      <i class="fas fa-external-link-alt me-1"></i>Live Demo
+                    </a>
+                    <a href="https://github.com/petitesnorlax25/SmartGateDeployment" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                      <i class="fab fa-github me-1"></i>Code
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative project-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="project-image-overlay"></div>
+                  <img src="ecotracker.png" alt="EcoTracker Project" class="project-image" />
+                </div>
+                <div class="p-4">
+             <h4 class="fw-bold mb-3">EcoTracker (Eco-Friendly Habit Tracker) – Python Capstone Project</h4>
+<p class="text-light opacity-75 mb-3">
+A web-based habit tracking application built with Flask to promote sustainable living. Users can add eco-friendly actions, mark daily progress through a checklist, review their activity history, and track improvement with charts.
+</p>
+
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Python</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Flask</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">CSS</span>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <a href="https://ecotracker-eco-friendly-habit-tracker.onrender.com/" class="btn btn-primary btn-sm rounded-pill px-3">
+                      <i class="fas fa-external-link-alt me-1"></i>Live Demo
+                    </a>
+                    <a href="https://github.com/petitesnorlax25/EcoTracker---eco-friendly-habit-tracker" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                      <i class="fab fa-github me-1"></i>Code
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="project-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative project-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="project-image-overlay"></div>
+                  <img src="guidance system.png" alt="EMEMHS Guidance System" class="project-image" />
+                </div>
+                <div class="p-4">
+     <h4 class="fw-bold mb-3">EMEMHS Guidance System - PHP Capstone Project</h4>
+<p class="text-light opacity-75 mb-3">
+A school guidance platform for handling student concerns, complaints, and lost-and-found reports. It features role-based dashboards, appointment scheduling, case tracking, and a color-coded calendar for efficient monitoring and follow-up.
+</p>
+
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">PHP</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Tailwind CSS</span>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <a href="https://github.com/petitesnorlax25/EMEMHS-Guidance-System" class="btn btn-primary btn-sm rounded-pill px-3">
+                      <i class="fas fa-external-link-alt me-1"></i>Live Demo
+                    </a>
+                    <a href="https://github.com/petitesnorlax25/EMEMHS-Guidance-System" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                      <i class="fab fa-github me-1"></i>Code
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 4 -->
+          
+            <div class="project-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative project-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="project-image-overlay"></div>
+                  <img src="https://via.placeholder.com/350x200/ED8B00/ffffff?text=Web+Game" alt="Web Game Project" class="project-image" />
+                </div>
+                <div class="p-4">
+                  <h4 class="fw-bold mb-3">Interactive Web Game</h4>
+                  <p class="text-light opacity-75 mb-3">Browser-based multiplayer game with real-time interactions, leaderboards, and social features.</p>
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Three.js</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">WebGL</span>
+                    <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">Socket.io</span>
+                  </div>
+                  <div class="d-flex gap-3">
+                    <a href="#" class="btn btn-primary btn-sm rounded-pill px-3">
+                      <i class="fas fa-external-link-alt me-1"></i>Live Demo
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                      <i class="fab fa-github me-1"></i>Code
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) SKILLS SECTION - Redesigned with level indicators -->
+    <section id="skills" class="section-padding">
+      <div class="container content-max mx-auto px-4">
+        <div class="text-center mb-5 fade-in-up">
+          <h2 class="display-4 fw-bold mb-3">Technical Skills</h2>
+          <p class="lead text-light opacity-75 mx-auto" style="max-width: 600px;">My expertise in various programming languages and technologies with proficiency levels.</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- JavaScript -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-java fa-2x me-3" style="color: #ED8B00;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Java</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">90%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- React -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-leaf fa-2x me-3" style="color: #6DB33F;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Springboot</h5>
+          
+                </div>
+                <span class="badge bg-primary px-3 py-2">85%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="85"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Python -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-python fa-2x me-3" style="color: #3776AB;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Python</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">80%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node.js -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-php fa-2x me-3" style="color: #777BB4;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">PHP</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">90%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vue.js -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-flask fa-2x me-3" style="color: #000000;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Flask</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">80%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHP -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-react fa-2x me-3" style="color: #61DAFB;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">React JS</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">75%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="75"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Java -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-node-js fa-2x me-3" style="color: #339933;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">Node JS</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">70%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="70"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TypeScript -->
+          <div class="col-lg-6 fade-in">
+            <div class="skill-item p-4 rounded-4 glass-effect">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fab fa-js-square fa-2x me-3 typescript-icon" style="color: #F7DF1E;"></i>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 fw-bold">JavaScript</h5>
+                </div>
+                <span class="badge bg-primary px-3 py-2">85%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" data-width="85"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) CONTACT SECTION -->
+    <footer id="contact" class="section-padding" style="background: #000C66;">
+      <div class="container content-max mx-auto px-4">
+        <div class="text-center mb-5 fade-in-up">
+          <h2 class="display-4 fw-bold mb-3">Get In Touch</h2>
+          <p class="lead text-light opacity-75 mx-auto" style="max-width: 600px;">Open to freelance projects, full-time opportunities, and exciting collaborations. Let's build something amazing together!</p>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-lg-4 fade-in-left">
+            <div class="glass-effect p-4 rounded-4 h-100">
+              <div class="text-center">
+                <i class="fas fa-envelope fa-3x mb-3" style="color: #7EC8E3;"></i>
+                <h5 class="fw-bold mb-3">Email Me</h5>
+                <a href="mailto:sf.fernandez@example.com" class="text-decoration-none">
+                  <span class="text-light opacity-75">sigfredofernandez25@gmail.com</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 fade-in-up">
+            <div class="glass-effect p-4 rounded-4 h-100">
+              <div class="text-center">
+                <i class="fas fa-phone fa-3x mb-3" style="color: #7EC8E3;"></i>
+                <h5 class="fw-bold mb-3">Call Me</h5>
+                <a href="tel:+639151018824" class="text-decoration-none">
+                  <span class="text-light opacity-75">+639151018824</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 fade-in-right">
+            <div class="glass-effect p-4 rounded-4 h-100">
+              <div class="text-center">
+                <i class="fas fa-map-marker-alt fa-3x mb-3" style="color: #7EC8E3;"></i>
+                <h5 class="fw-bold mb-3">Location</h5>
+                <span class="text-light opacity-75">Bago City, Negros Occidental, Philippines<br>Available for remote work</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-12 text-center fade-in">
+            <div class="d-flex justify-content-center gap-4 mb-4">
+              <a href="https://github.com/petitesnorlax25" target="_blank" class="text-decoration-none">
+                <i class="fab fa-github fa-2x contact-icon" style="color: #7EC8E3;"></i>
+              </a>
+              <a href="https://web.facebook.com/sigfred.fernandez" target="_blank" class="text-decoration-none">
+                <i class="fab fa-facebook fa-2x contact-icon" style="color: #7EC8E3;"></i>
+              </a>
+              <a href="https://www.instagram.com/sigfredfernandez/" target="_blank" class="text-decoration-none">
+                <i class="fab fa-instagram fa-2x contact-icon" style="color: #7EC8E3;"></i>
+              </a>
+            </div>
+            <div class="border-top pt-4 mt-4" style="border-color: rgba(126, 200, 227, 0.2) !important;">
+              <p class="text-light opacity-50 mb-0">
+                © <span id="year"></span> Sigfredo Fernandez. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar-custom');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Enhanced fade-in animation on scroll with staggered effects
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Animate skill progress bars
+          if (entry.target.classList.contains('skill-item')) {
+            const progressBar = entry.target.querySelector('.skill-progress-bar');
+            if (progressBar) {
+              const width = progressBar.getAttribute('data-width');
+              setTimeout(() => {
+                progressBar.style.width = width + '%';
+              }, 300);
+            }
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up, .skill-item').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Close mobile navbar when clicking on a link
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+          const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+          bsCollapse.hide();
+        }
+      });
+    });
+
+    // Initialize skill progress bars to 0 width
+    document.querySelectorAll('.skill-progress-bar').forEach(bar => {
+      bar.style.width = '0%';
+    });
+
+  </script>
+</body>
+</html>
