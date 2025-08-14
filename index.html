@@ -609,6 +609,93 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
+    /* Certificate Image Containers */
+    .certificate-image-container {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.1), rgba(126, 200, 227, 0.1));
+    }
+    
+    .certificate-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: brightness(0.95) contrast(1.05);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px;
+    }
+    
+    .certificate-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.15), rgba(126, 200, 227, 0.1));
+      opacity: 0;
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+    
+    .card-hover:hover .certificate-image {
+      transform: scale(1.05);
+      filter: brightness(1.1) contrast(1.2);
+    }
+    
+    .card-hover:hover .certificate-image-overlay {
+      opacity: 1;
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.2), rgba(126, 200, 227, 0.15));
+    }
+
+    /* Horizontal Certificates Carousel */
+    .certificates-carousel-container {
+      position: relative;
+    }
+
+    .certificates-carousel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(126, 200, 227, 0.5) transparent;
+    }
+
+    .certificates-carousel::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .certificates-carousel::-webkit-scrollbar-track {
+      background: rgba(126, 200, 227, 0.1);
+      border-radius: 10px;
+    }
+
+    .certificates-carousel::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #0000FF, #7EC8E3);
+      border-radius: 10px;
+    }
+
+    .certificates-carousel::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, #7EC8E3, #0000FF);
+    }
+
+    /* Smooth scroll snap for better UX */
+    .certificates-carousel {
+      scroll-snap-type: x mandatory;
+    }
+
+    .certificate-card {
+      scroll-snap-align: start;
+    }
+
+    /* Certificate card animations */
+    .certificate-card:nth-child(odd) {
+      animation: subtleFloat 8s ease-in-out infinite;
+    }
+    
+    .certificate-card:nth-child(even) {
+      animation: subtleFloat 8s ease-in-out infinite reverse;
+      animation-delay: -4s;
+    }
+
   </style>
 </head>
 <body class="bg-primary text-white">
@@ -619,7 +706,9 @@
   <!-- Fixed Navbar with 4 sections -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="#profile">Sigfredo Fernandez</a>
+      <a class="navbar-brand" href="#profile">
+        <i class="fas fa-code me-2" style="color: #EAF6FF;"></i>Sigfredo Fernandez
+      </a>
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -635,6 +724,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#certificates">Certificates</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -952,7 +1044,162 @@ A school guidance platform for handling student concerns, complaints, and lost-a
       </div>
     </section>
 
-    <!-- 4) CONTACT SECTION -->
+    <!-- 4) CERTIFICATES SECTION -->
+    <section id="certificates" class="section-padding" style="background: #000C66;">
+      <div class="container content-max mx-auto px-4">
+        <div class="text-center mb-5 fade-in-up">
+          <h2 class="display-4 fw-bold mb-3">Certificates & Achievements</h2>
+          <p class="lead text-light opacity-75 mx-auto" style="max-width: 600px;">Professional certifications and achievements that validate my technical expertise and commitment to continuous learning.</p>
+        </div>
+
+        <!-- Horizontal Scrollable Certificates Container -->
+        <div class="certificates-carousel-container fade-in">
+          <div class="certificates-carousel d-flex gap-4 pb-3" style="overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
+            <!-- Certificate Card 1 -->
+            <div class="certificate-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative certificate-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="certificate-image-overlay"></div>
+                  <img src="cybersecurity-seminar.jpg" alt="Cyber Security Seminar Certificate" class="certificate-image" />
+                </div>
+                <div class="p-4">
+                  <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div>
+                      <h5 class="fw-bold mb-2">Cyber Security Seminar Certificate</h5>
+                      <p class="text-light opacity-75 mb-2">Bago City College</p>
+                      <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">
+                        <i class="fas fa-calendar-alt me-1"></i>March 26, 2023
+                      </span>
+                    </div>
+                    <i class="fas fa-shield-alt fa-2x" style="color: #FF6B6B;"></i>
+                  </div>
+                  <p class="text-light opacity-75 mb-3">Participated in the seminar "Cyber Security: Issues, Challenges, Threats, and Solutions" gaining insights into current digital security risks and mitigation strategies.</p>
+                  <div class="d-flex gap-2">
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 107, 107, 0.2); color: #FF6B6B; font-size: 0.75rem;">Cybersecurity</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 107, 107, 0.2); color: #FF6B6B; font-size: 0.75rem;">Security</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 107, 107, 0.2); color: #FF6B6B; font-size: 0.75rem;">Seminar</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certificate Card 2 -->
+            <div class="certificate-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative certificate-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="certificate-image-overlay"></div>
+                  <img src="hackaton-code-champion.jpg" alt="Hackathon Code Champion" class="certificate-image" />
+                </div>
+                <div class="p-4">
+                  <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div>
+                      <h5 class="fw-bold mb-2">Hackathon Code Champion</h5>
+                      <p class="text-light opacity-75 mb-2">First BSIS Hackathon 2024</p>
+                      <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">
+                        <i class="fas fa-calendar-alt me-1"></i>December 8, 2024
+                      </span>
+                    </div>
+                    <i class="fas fa-code fa-2x" style="color: #FFD700;"></i>
+                  </div>
+                  <p class="text-light opacity-75 mb-3">Awarded First Place in the First BSIS Hackathon held on December 8, 2024 for exceptional programming skills and innovative problem-solving in competitive coding scenarios.</p>
+                  <div class="d-flex gap-2">
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-size: 0.75rem;">Hackathon</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-size: 0.75rem;">Programming</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-size: 0.75rem;">Champion</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certificate Card 3 -->
+            <div class="certificate-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative certificate-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="certificate-image-overlay"></div>
+                  <img src="hackaton-first-place.jpg" alt="Hackathon First Place Award" class="certificate-image" />
+                </div>
+                <div class="p-4">
+                  <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div>
+                      <h5 class="fw-bold mb-2">Hackathon First Place Award</h5>
+                      <p class="text-light opacity-75 mb-2">First BSIS Hackathon 2024</p>
+                      <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">
+                        <i class="fas fa-calendar-alt me-1"></i>December 8, 2024
+                      </span>
+                    </div>
+                    <i class="fas fa-trophy fa-2x" style="color: #FFD700;"></i>
+                  </div>
+                  <p class="text-light opacity-75 mb-3">Recognized as First Place Winner in the First BSIS Hackathon held on December 8, 2024, showcasing advanced coding techniques and real-world solution development under time constraints.</p>
+                  <div class="d-flex gap-2">
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-size: 0.75rem;">Hackathon</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-size: 0.75rem;">First Place</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-size: 0.75rem;">Coding</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certificate Card 4 -->
+            <div class="certificate-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative certificate-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="certificate-image-overlay"></div>
+                  <img src="programmer-of-the-year.jpg" alt="Programmer of the Year" class="certificate-image" />
+                </div>
+                <div class="p-4">
+                  <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div>
+                      <h5 class="fw-bold mb-2">Programmer of the Year</h5>
+                      <p class="text-light opacity-75 mb-2">Bago City College</p>
+                      <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">
+                        <i class="fas fa-calendar-alt me-1"></i>June 4, 2025
+                      </span>
+                    </div>
+                    <i class="fas fa-award fa-2x" style="color: #9B59B6;"></i>
+                  </div>
+                  <p class="text-light opacity-75 mb-3">Honored as Programmer of the Year for outstanding knowledge, technical proficiency, and consistent excellence in computer programming at Bago City College.</p>
+                  <div class="d-flex gap-2">
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(155, 89, 182, 0.2); color: #9B59B6; font-size: 0.75rem;">Programming</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(155, 89, 182, 0.2); color: #9B59B6; font-size: 0.75rem;">Excellence</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(155, 89, 182, 0.2); color: #9B59B6; font-size: 0.75rem;">Award</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certificate Card 5 -->
+            <div class="certificate-card flex-shrink-0" style="width: 350px;">
+              <div class="card-hover h-100 rounded-4 overflow-hidden glass-effect">
+                <div class="position-relative certificate-image-container" style="height: 200px; overflow: hidden;">
+                  <div class="certificate-image-overlay"></div>
+                  <img src="most-outstanding-capstone-project-python.jpg" alt="Most Outstanding Capstone Project" class="certificate-image" />
+                </div>
+                <div class="p-4">
+                  <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div>
+                      <h5 class="fw-bold mb-2">Most Outstanding Capstone Project</h5>
+                      <p class="text-light opacity-75 mb-2">Academic Achievement</p>
+                      <span class="badge rounded-pill px-3 py-2" style="background: rgba(126, 200, 227, 0.2); color: #7EC8E3;">
+                        <i class="fas fa-calendar-alt me-1"></i>August 5, 2025
+                      </span>
+                    </div>
+                    <i class="fas fa-graduation-cap fa-2x" style="color: #2ECC71;"></i>
+                  </div>
+                  <p class="text-light opacity-75 mb-3">Recognized for delivering the Most Outstanding Capstone Project, demonstrating innovation, technical depth, and practical application of software development principles (August 5, 2025).</p>
+                  <div class="d-flex gap-2">
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(46, 204, 113, 0.2); color: #2ECC71; font-size: 0.75rem;">Capstone</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(46, 204, 113, 0.2); color: #2ECC71; font-size: 0.75rem;">Innovation</span>
+                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(46, 204, 113, 0.2); color: #2ECC71; font-size: 0.75rem;">Outstanding</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5) CONTACT SECTION -->
     <footer id="contact" class="section-padding" style="background: #000C66;">
       <div class="container content-max mx-auto px-4">
         <div class="text-center mb-5 fade-in-up">
